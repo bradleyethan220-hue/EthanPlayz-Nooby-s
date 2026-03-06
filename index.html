@@ -1,187 +1,147 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <title>EthanPlayz - Official Website</title>
+  <title>Ethan Fan Website</title>
   <style>
     body {
+      background: #1c1c1c;
+      font-family: Arial, sans-serif;
       margin: 0;
-      font-family: system-ui, sans-serif;
-      color: #f5f5f5;
-      background: radial-gradient(circle at top, #2b2b40 0, #050509 45%, #000000 100%);
-      min-height: 100vh;
+      color: white;
+    }
+
+    /* Centered Login Box */
+    #loginBox {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background-image: linear-gradient(45deg, #1a1a26 25%, transparent 25%, transparent 50%, #1a1a26 50%, #1a1a26 75%, transparent 75%, transparent);
-      background-size: 40px 40px;
-      opacity: 0.12;
-      animation: bgMove 20s linear infinite;
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    @keyframes bgMove {
-      from { transform: translate3d(0,0,0); }
-      to   { transform: translate3d(40px,40px,0); }
-    }
-
-    header {
-      width: 100%;
-      padding: 20px;
-      background: rgba(5, 5, 12, 0.9);
-      box-shadow: 0 0 30px rgba(0,0,0,0.8);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      backdrop-filter: blur(8px);
-      z-index: 10;
-    }
-
-    .channel {
-      display: flex;
-      align-items: center;
-      gap: 16px;
       justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
 
-    .channel img {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      border: 3px solid #f5d34f;
-      box-shadow: 0 0 18px rgba(245, 211, 79, 0.7);
+    .login-box {
+      background: #2a2a2a;
+      padding: 30px;
+      width: 350px;
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
     }
 
-    h1 {
-      margin: 0;
-      font-size: 32px;
-      letter-spacing: 1px;
-      text-shadow: 0 0 10px #f5d34f, 0 0 20px #f5d34f;
-      animation: glow 2.5s ease-in-out infinite alternate;
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-weight: 600;
     }
 
-    @keyframes glow {
-      from { text-shadow: 0 0 6px #f5d34f, 0 0 12px #f5d34f; }
-      to   { text-shadow: 0 0 16px #f5d34f, 0 0 32px #f5d34f; }
-    }
-
-    main {
+    .input {
       width: 100%;
-      max-width: 1000px;
-      padding: 24px 16px 40px;
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #3d3d3d;
+      border-radius: 4px;
+      background: #1f1f1f;
+      color: white;
+      font-size: 15px;
     }
 
-    .card {
-      background: rgba(10, 10, 18, 0.95);
-      border-radius: 14px;
-      padding: 20px;
-      box-shadow: 0 0 30px rgba(0,0,0,0.8);
-      border: 1px solid rgba(245, 211, 79, 0.15);
+    .input:focus {
+      outline: none;
+      border-color: #00a2ff;
     }
 
-    iframe {
+    .button {
       width: 100%;
-      border-radius: 12px;
+      padding: 12px;
+      background: #00a2ff;
       border: none;
-      background: #000;
-    }
-
-    #mainVideo {
-      height: 360px;
-    }
-
-    .latest-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
+      border-radius: 4px;
+      color: white;
+      font-size: 17px;
+      cursor: pointer;
       margin-top: 10px;
+      font-weight: bold;
     }
 
-    .thumb-card iframe {
-      height: 140px;
+    .button:hover {
+      background: #0088d1;
     }
 
-    .comments-box {
-      width: 100%;
-      min-height: 120px;
+    /* Content Section */
+    #content {
+      display: none;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .video-box {
+      margin-bottom: 40px;
+    }
+
+    img.thumbnail {
+      width: 300px;
       border-radius: 10px;
-      border: 1px solid #2b2b3d;
-      background: #0b0b14;
-      color: #f5f5f5;
-      padding: 10px;
-      resize: vertical;
-      font-family: inherit;
-      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    img.icon {
+      width: 120px;
+      border-radius: 50%;
+      margin-bottom: 20px;
+      border: 3px solid #00a2ff;
     }
   </style>
 </head>
+
 <body>
 
-<header>
-  <div class="channel">
-    <img src="https://yt3.ggpht.com/y1eCSSYk1Bfwhz1fgdo_50VMsSCJQDso30IdHo3gcM6BFrzMfZ2PCIgC3R-Z1yoABt8GKTfEbw=s108-c-k-c0x00ffffff-no-rj">
-    <h1>EthanPlayz</h1>
+  <!-- LOGIN PAGE -->
+  <div id="loginBox">
+    <div class="login-box">
+      <h2>Login</h2>
+
+      <input id="displayName" class="input" placeholder="Display Name">
+      <input id="password" class="input" type="password" placeholder="Password">
+
+      <button class="button" onclick="login()">Log In</button>
+    </div>
   </div>
-</header>
 
-<main>
+  <!-- MAIN CONTENT AFTER LOGIN -->
+  <div id="content">
 
-  <section class="card">
-    <h2>Look at this newest video!</h2>
-    <iframe id="mainVideo" allowfullscreen></iframe>
-  </section>
+    <!-- Your Icon -->
+    <img class="icon" src="https://yt3.googleusercontent.com/y1eCSSYk1Bfwhz1fgdo_50VMsSCJQDso30IdHo3gcM6BFrzMfZ2PCIgC3R-Z1yoABt8GKTfEbw=s160-c-k-c0x00ffffff-no-rj">
 
-  <section class="card">
-    <h2>Latest 3 videos</h2>
-    <div class="latest-grid" id="latestGrid"></div>
-  </section>
+    <h1>Welcome to Ethan's Fan Website</h1>
+    <h2>Latest Videos</h2>
 
-  <section class="card">
-    <h2>Leave a message</h2>
-    <textarea class="comments-box" placeholder="Type something..."></textarea>
-  </section>
+    <!-- VIDEO 1 -->
+    <div class="video-box">
+      <img class="thumbnail" src="https://i.ytimg.com/an_webp/lzlmpB5FggQ/mqdefault_6s.webp?du=3000&sqp=CNiFrc0G&rs=AOn4CLDwPy_pK61CB1qMlZbndxyMN8whSQ">
 
-</main>
+      <iframe width="560" height="315"
+        src="https://www.youtube.com/embed/lzlmpB5FggQ?start=870"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
 
-<script>
-  const channelId = "UCy1y8Yt7xk8gJqzQ0Q7u0xw";
+  </div>
 
-  fetch("https://www.youtube.com/feeds/videos.xml?channel_id=" + channelId)
-    .then(res => res.text())
-    .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
-    .then(data => {
-      const entries = Array.from(data.getElementsByTagName("entry"));
-      if (!entries.length) return;
+  <script>
+    function login() {
+      const name = document.getElementById("displayName").value;
 
-      const first = entries[0];
-      const firstId = first.getElementsByTagName("yt:videoId")[0].textContent;
-      document.getElementById("mainVideo").src =
-        "https://www.youtube.com/embed/" + firstId;
+      if (name.trim() === "") {
+        alert("Please enter a display name.");
+        return;
+      }
 
-      const grid = document.getElementById("latestGrid");
-      entries.slice(0, 3).forEach(entry => {
-        const vid = entry.getElementsByTagName("yt:videoId")[0].textContent;
-        const card = document.createElement("div");
-        card.className = "thumb-card";
-        card.innerHTML = `
-          <iframe src="https://www.youtube.com/embed/${vid}" allowfullscreen></iframe>
-        `;
-        grid.appendChild(card);
-      });
-    });
-</script>
+      // Hide login, show content
+      document.getElementById("loginBox").style.display = "none";
+      document.getElementById("content").style.display = "block";
+    }
+  </script>
 
 </body>
 </html>
