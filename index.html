@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>EthanPlayz - Official Website</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      color: #f5f5f5;
+      background: radial-gradient(circle at top, #2b2b40 0, #050509 45%, #000000 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: linear-gradient(45deg, #1a1a26 25%, transparent 25%, transparent 50%, #1a1a26 50%, #1a1a26 75%, transparent 75%, transparent);
+      background-size: 40px 40px;
+      opacity: 0.12;
+      animation: bgMove 20s linear infinite;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    @keyframes bgMove {
+      from { transform: translate3d(0,0,0); }
+      to   { transform: translate3d(40px,40px,0); }
+    }
+
+    header {
+      width: 100%;
+      padding: 20px;
+      background: rgba(5, 5, 12, 0.9);
+      box-shadow: 0 0 30px rgba(0,0,0,0.8);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(8px);
+      z-index: 10;
+    }
+
+    .channel {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      justify-content: center;
+    }
+
+    .channel img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 3px solid #f5d34f;
+      box-shadow: 0 0 18px rgba(245, 211, 79, 0.7);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 32px;
+      letter-spacing: 1px;
+      text-shadow: 0 0 10px #f5d34f, 0 0 20px #f5d34f;
+      animation: glow 2.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 6px #f5d34f, 0 0 12px #f5d34f; }
+      to   { text-shadow: 0 0 16px #f5d34f, 0 0 32px #f5d34f; }
+    }
+
+    main {
+      width: 100%;
+      max-width: 1000px;
+      padding: 24px 16px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .card {
+      background: rgba(10, 10, 18, 0.95);
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.8);
+      border: 1px solid rgba(245, 211, 79, 0.15);
+    }
+
+    iframe {
+      width: 100%;
+      border-radius: 12px;
+      border: none;
+      background: #000;
+    }
+
+    #mainVideo {
+      height: 360px;
+    }
+
+    .latest-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 10px;
+    }
+
+    .thumb-card iframe {
+      height: 140px;
+    }
+
+    .comments-box {
+      width: 100%;
+      min-height: 120px;
+      border-radius: 10px;
+      border: 1px solid #2b2b3d;
+      background: #0b0b14;
+      color: #f5f5f5;
+      padding: 10px;
+      resize: vertical;
+      font-family: inherit;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="channel">
+    <img src="https://yt3.ggpht.com/y1eCSSYk1Bfwhz1fgdo_50VMsSCJQDso30IdHo3gcM6BFrzMfZ2PCIgC3R-Z1yoABt8GKTfEbw=s108-c-k-c0x00ffffff-no-rj">
+    <h1>EthanPlayz</h1>
+  </div>
+</header>
+
+<main>
+
+  <section class="card">
+    <h2>Look at this newest video!</h2>
+    <iframe id="mainVideo" allowfullscreen></iframe>
+  </section>
+
+  <section class="card">
+    <h2>Latest 3 videos</h2>
+    <div class="latest-grid" id="latestGrid"></div>
+  </section>
+
+  <section class="card">
+    <h2>Leave a message</h2>
+    <textarea class="comments-box" placeholder="Type something..."></textarea>
+  </section>
+
+</main>
+
+<script>
+  const channelId = "UCy1y8Yt7xk8gJqzQ0Q7u0xw";
+
+  fetch("https://www.youtube.com/feeds/videos.xml?channel_id=" + channelId)
+    .then(res => res.text())
+    .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
+    .then(data => {
+      const entries = Array.from(data.getElementsByTagName("entry"));
+      if (!entries.length) return;
+
+      const first = entries[0];
+      const firstId = first.getElementsByTagName("yt:videoId")[0].textContent;
+      document.getElementById("mainVideo").src =
+        "https://www.youtube.com/embed/" + firstId;
+
+      const grid = document.getElementById("latestGrid");
+      entries.slice(0, 3).forEach(entry => {
+        const vid = entry.getElementsByTagName("yt:videoId")[0].textContent;
+        const card = document.createElement("div");
+        card.className = "thumb-card";
+        card.innerHTML = `
+          <iframe src="https://www.youtube.com/embed/${vid}" allowfullscreen></iframe>
+        `;
+        grid.appendChild(card);
+      });
+    });
+</script>
+
+</body>
+</html>
